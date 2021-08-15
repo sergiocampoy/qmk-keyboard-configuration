@@ -1,5 +1,11 @@
 # My custom keymap for the corne keyboard
 
+Welcome to my config files for my hand-wired corne keyboard!
+
+Most of the information will be here in this README. If you just want to flash my configuration and test it, you can download the .hex file and feed it to QMK toolbox. Be aware that his might not work depending on how the keys are wired to the arduino or how both halves are connected, so proceed with caution.
+
+If you want to peek the code or tinker with it: go ahead! I tried my best to document it both in the files and here in the README.
+
 ## Layers
 
 Warning! For the layers to work as shown, you have to tell the OS that the
