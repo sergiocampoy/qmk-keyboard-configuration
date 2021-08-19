@@ -35,6 +35,7 @@ enum layers{
   _QWERTY = 0,  // default layer
   _COLEMAK_DH,  // layer with colemak-dh layout
   _LOL,         // layer for playing League of Legends
+  _FACTORIO,    // layer for playing factorio, minecraft...
   _SYMBOL,      // symbol layer (press middle thumb key in the left)
   _FUNCTION,    // function layer (press middle thumb key in the right)
   _SWITCH       // layer-switching layer (press both middle thumb keys at once)
@@ -51,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
  * | sft |  z  |  x  |  c  |  v  |  b  |   |  n  |  m  |  ,  |  .  |  -  | esc |
  * `-----------------+-----+-----+-----|   |-----+-----+-----+-----------------'
- *                   | gui | fn1 | spa |   | ent | fn2 | alt |
+ *                   | gui | fn1 | spc |   | ent | fn2 | alt |
  *                   `-----+-----+-----'   `-----+-----+-----'
  */
 [_QWERTY] = LAYOUT_split_3x6_3(
@@ -71,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
  * | sft |  z  |  x  |  c  |  d  |  v  |   |  k  |  h  |  ,  |  .  |  -  | esc |
  * `-----------------+-----+-----+-----|   |-----+-----+-----+-----------------'
- *                   | gui | fn1 | spa |   | ent | fn2 | alt |
+ *                   | gui | fn1 | spc |   | ent | fn2 | alt |
  *                   `-----+-----+-----'   `-----+-----+-----'
  */
 [_COLEMAK_DH] = LAYOUT_split_3x6_3(
@@ -88,21 +89,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------.   ,-----------------------------------.
  * | tab |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | del |
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
- * | ctl |  $  |  +  |  (  |  )  |  @  |   |  |  |  {  |  }  |  =  |  *  |  '  |
+ * | ctl |  $  |  +  |  (  |  )  |  /  |   |  |  |  {  |  }  |  =  |  *  |  '  |
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
- * | sft |  !  |  #  |  ¿  |  ?  |  ~  |   |  &  |  [  |  ]  |  %  |  ^  | esc |
+ * | sft |  !  |  #  |  ¿  |  ?  |  @  |   |  &  |  [  |  ]  |  %  |  ^  | esc |
  * `-----------------+-----+-----+-----|   |-----+-----+-----+-----------------'
- *                   | gui | fn1 | spa |   | ent | fn2 | alt |
+ *                   | gui | fn1 | spc |   | ent | fn2 | alt |
  *                   `-----+-----+-----'   `-----+-----+-----'
  */
 // WARNING! This layer only works when a spanish keyboard is set in software
 // With any other setting the symbols will be different
 [_SYMBOL] = LAYOUT_split_3x6_3(
   KC_TAB,           KC_1,    KC_2,       KC_3,      KC_4,       KC_5,         KC_6,       KC_7,          KC_8,          KC_9,    KC_0,       KC_BSPC,
-  KC_LCTL,          KC_DLR,  KC_RBRC,    S(KC_8),   S(KC_9),    RALT(KC_2),   RALT(KC_1), RALT(KC_QUOT), RALT(KC_BSLS), S(KC_0), S(KC_RBRC), KC_MINS,
-  TD(TD_CAPS_LOCK), S(KC_1), RALT(KC_3), S(KC_EQL), S(KC_MINS), RALT(KC_4),   S(KC_6),    RALT(KC_LBRC), RALT(KC_RBRC), S(KC_5), S(KC_LBRC), KC_ESC,
+  KC_LCTL,          KC_DLR,  KC_RBRC,    S(KC_8),   S(KC_9),    S(KC_7),      RALT(KC_1), RALT(KC_QUOT), RALT(KC_BSLS), S(KC_0), S(KC_RBRC), KC_MINS,
+  TD(TD_CAPS_LOCK), S(KC_1), RALT(KC_3), S(KC_EQL), S(KC_MINS), RALT(KC_2),   S(KC_6),    RALT(KC_LBRC), RALT(KC_RBRC), S(KC_5), S(KC_LBRC), KC_ESC,
 
-  KC_LGUI, KC_TRNS,    KC_SPC,
+  KC_LGUI, KC_TRNS,    LALT_T(KC_SPC),
   KC_ENT, MO(_SWITCH), KC_RALT
 ),
 
@@ -110,19 +111,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------.   ,-----------------------------------.
  * | tab | F1  | F2  | F3  | F4  | F5  |   | F6  | F7  | F8  | F9  | F10 | del |
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
- * | cap |  x  |  x  |  x  |  x  |  x  |   |  ←  |  ↓  |  ↑  |  →  |  x  |  x  |
+ * | cap |  x  |  x  |  <  |  >  |  x  |   |  ←  |  ↓  |  ↑  |  →  |  x  | F11 |
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
- * | ctr |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |  x  | esc |
+ * | ctr |  x  |  ⏮︎  |  ⏯︎  |  ⏭︎  |  x  |   |  x  | mut | vo↓ | vo↑ |  x  | esc |
  * `-----------------+-----+-----+-----|   |-----+-----+-----+-----------------'
- *                   | gui | fn1 |  x  |   | ent | fn2 | alt |
+ *                   | gui | fn1 | spc |   | ent | fn2 | alt |
  *                   `-----+-----+-----'   `-----+-----+-----'
  */
 [_FUNCTION] = LAYOUT_split_3x6_3(
-  KC_TAB,  KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,   KC_F6,   KC_F7,   KC_F8, KC_F9,   KC_F10, KC_DEL,
-  KC_LCTL, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_NO,  KC_NO,
-  KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO, KC_NO,   KC_NO,  KC_ESC,
+  KC_TAB,  KC_F1, KC_F2,   KC_F3,   KC_F4,      KC_F5,   KC_F6,   KC_F7,   KC_F8,      KC_F9,    KC_F10, KC_DEL,
+  KC_LCTL, KC_NO, KC_NO,   KC_NUBS, S(KC_NUBS), KC_NO,   KC_LEFT, KC_DOWN, KC_UP,      KC_RGHT,  KC_NO,  KC_F11,
+  KC_LSFT, KC_NO, KC_MPRV, KC_MPLY, KC_MNXT,    KC_NO,   KC_NO,   KC_MUTE, KC_VOLD, KC_VOLU, KC_NO,  KC_ESC,
 
-  KC_LGUI, MO(_SWITCH), KC_SPC,
+  KC_LGUI, MO(_SWITCH), LALT_T(KC_SPC),
   KC_ENT,  KC_TRNS, KC_RALT
 ),
 
@@ -130,39 +131,59 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------.   ,-----------------------------------.
  * | tab |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |  x  | del |
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
- * | ctl |  x  |  x  |  x  | lol |  x  |   |  x  | qwe | col |  x  |  x  |  x  |
+ * | ctl |  x  |  x  | fac | lol |  x  |   |  x  | qwe | col |  x  |  x  |  x  |
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
  * | sft |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |  x  | esc |
  * `-----------------+-----+-----+-----|   |-----+-----+-----+-----------------'
- *                   | sup | fn1 |  x  |   | ent | fn2 | alt |
+ *                   | sup | fn1 | spc |   | ent | fn2 | alt |
  *                   `-----+-----+-----'   `-----+-----+-----'
  */
 [_SWITCH] = LAYOUT_split_3x6_3(
-  KC_TAB,  KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,   KC_NO, KC_NO,       KC_NO,           KC_NO, KC_NO, KC_BSPC,
-  KC_LCTL, KC_NO, KC_NO, KC_NO, DF(_LOL), KC_NO,   KC_NO, DF(_QWERTY), DF(_COLEMAK_DH), KC_NO, KC_NO, KC_NO,
-  KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,   KC_NO, KC_NO,       KC_NO,           KC_NO, KC_NO, KC_ESC,
+  KC_TAB,  KC_NO, KC_NO, KC_NO,         KC_NO,    KC_NO,   KC_NO, KC_NO,       KC_NO,           KC_NO, KC_NO, KC_BSPC,
+  KC_LCTL, KC_NO, KC_NO, DF(_FACTORIO), DF(_LOL), KC_NO,   KC_NO, DF(_QWERTY), DF(_COLEMAK_DH), KC_NO, KC_NO, KC_NO,
+  KC_LSFT, KC_NO, KC_NO, KC_NO,         KC_NO,    KC_NO,   KC_NO, KC_NO,       KC_NO,           KC_NO, KC_NO, KC_ESC,
 
-  KC_LGUI, KC_TRNS, KC_SPC,
+  KC_LGUI, KC_TRNS, LALT_T(KC_SPC),
   KC_ENT, KC_TRNS, KC_RALT
 ),
 
 /* League of Legends layer
  * ,-----------------------------------.   ,-----------------------------------.
- * | esc |  1  |  2  |  3  |  4  |  5  |   |  y  |  u  |  i  |  o  |  p  | del |
+ * |  c  |  1  |  2  |  3  |  4  |  5  |   |  y  |  u  |  i  |  o  |  p  | del |
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
  * | tab |  q  |  w  |  e  |  r  |  t  |   |  h  |  j  |  k  |  l  |  ñ  |  ´  |
  * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
  * | sft |  a  |  s  |  d  |  f  |  g  |   |  n  |  m  |  ,  |  .  |  -  | esc |
  * `-----------------+-----+-----+-----|   |-----+-----+-----+-----------------'
- *                   | ctl | fn1 | spa |   | ent | fn2 | alt |
+ *                   | ctl | fn1 | spc |   | ent | fn2 | alt |
  *                   `-----+-----+-----'   `-----+-----+-----'
  */
 [_LOL] = LAYOUT_split_3x6_3(
-  KC_ESC,  KC_1, KC_2, KC_3, KC_4, KC_5,   KC_Y, KC_U, KC_I,    KC_O,   KC_P,     KC_BSPC,
+  KC_C,    KC_1, KC_2, KC_3, KC_4, KC_5,   KC_Y, KC_U, KC_I,    KC_O,   KC_P,     KC_BSPC,
   KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,   KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,  KC_QUOT,
   KC_LSFT, KC_A, KC_S, KC_D, KC_F, KC_G,   KC_N, KC_M, KC_COMM, KC_DOT, KC_SLASH, KC_ESC,
 
   KC_LCTL, MO(_SYMBOL), KC_SPC,
   KC_ENT,  MO(_FUNCTION), KC_RALT
-)
+),
+
+/* Factorio layer
+ * ,-----------------------------------.   ,-----------------------------------.
+ * | tab |  q  |  w  |  e  |  r  |  t  |   |  y  |  u  |  i  |  o  |  p  | del |
+ * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
+ * | ctl |  a  |  s  |  d  |  f  |  g  |   |  h  |  j  |  k  |  l  |  ñ  |  ´  |
+ * |-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
+ * | sft |  z  |  x  |  c  |  v  |  b  |   |  n  |  m  |  ,  |  .  |  -  | esc |
+ * `-----------------+-----+-----+-----|   |-----+-----+-----+-----------------'
+ *                   | alt | fn1 | spa |   | ent | fn2 | alt |
+ *                   `-----+-----+-----'   `-----+-----+-----'
+ */
+[_FACTORIO] = LAYOUT_split_3x6_3(
+  KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,   KC_Y, KC_U, KC_I,    KC_O,   KC_P,     KC_BSPC,
+  KC_LCTL, KC_A, KC_S, KC_D, KC_F, KC_G,   KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,  KC_QUOT,
+  KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B,   KC_N, KC_M, KC_COMM, KC_DOT, KC_SLASH, KC_ESC,
+
+  KC_LALT, MO(_SYMBOL),   KC_SPC,
+  KC_ENT,  MO(_FUNCTION), KC_RALT
+),
 };
